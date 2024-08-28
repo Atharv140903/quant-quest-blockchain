@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 
 // Define Routes
 app.use('/api/v1/quiz', require('./server/routes/quiz.routes'));
+app.use('/api/v1/auth', require('./server/routes/auth.routes'));
 
 
 

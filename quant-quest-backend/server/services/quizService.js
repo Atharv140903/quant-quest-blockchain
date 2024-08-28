@@ -1,6 +1,5 @@
 const quizRepository = require('../repositories/quizRepository');
 const quizQuestionRepository = require('../repositories/quizQuestionRepository');
-const { create } = require('../models/QuizQuestion');
 
 module.exports = {
     async registerQuiz (quizData) { // Register new quiz

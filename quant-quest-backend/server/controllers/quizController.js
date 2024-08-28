@@ -64,4 +64,26 @@ module.exports = {
             });
         }
     },
+
+    addQuizAlongWithQuestions: async (req, res) => {
+        try {
+            const quizData = req.body;
+            quizData.userId = req.user._id;
+            const quiz = await quizService.registerQuiz(quizData);
+            const quizId = quiz._id;
+            const questions = req.body.questions;
+            questions.forEach(async (question) => {
+                await quizService.addQuestion(quizId, question);
+            });
+            res.status(201).json({
+                status: 'success',
+                data: quiz,
+            });
+        } catch (error) {
+            res.status(400).json({ 
+                status: 'error',
+                message: error.message 
+            });
+        }
+    },
 };

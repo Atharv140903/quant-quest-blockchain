@@ -1,9 +1,9 @@
 const userRepository = require("../repositories/userRepository");
 const nonceRepository = require("../repositories/nonceRepository");
 const { v4: uuidv4 } = require("uuid");
-const Web3 = require("web3");
-const web3 = new Web3();
 const { createJwtToken } = require("../utils/token.util");
+const Web3 = require("web3");
+
 
 module.exports = {
     async requestNonce(walletAddress) {
@@ -19,7 +19,7 @@ module.exports = {
         }
 
         const message = `Nonce: ${nonceEntry.nonce}`;
-        const recoveredAddress = web3.eth.accounts.recover(message, signature);
+        const recoveredAddress = Web3.eth.accounts.recover(message, signature);
 
         if (recoveredAddress.toLowerCase() !== walletAddress.toLowerCase()) {
             throw new Error("Signature verification failed");

@@ -1,0 +1,120 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.home-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px; /* Adjust this value based on your navbar height */
+}
+
+.top-nav {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 20px; /* Allows for full-width use while keeping some padding */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between logo and buttons */
+  padding: 0 20px; /* Adds padding around the nav content */
+}
+
+.small-logo {
+  height: 60px; /* Increase the size as needed */
+  margin-right: auto; /* Ensures logo stays on the left */
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.87);
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.87);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.87);
+  color: #000;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.main-logo {
+  height: 300px; /* Increase the size as needed */
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 20px;
+}
+
+.get-started-button {
+  background-color: #00FFA3; /* A green color for the button */
+  border: none;
+  padding: 10px 30px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.get-started-button:hover {
+  background-color: #00FFA3;
+  transform: scale(1.05);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  .nav-button:hover {
+    background-color: #747bff;
+  }
+  .get-started-button {
+    background-color: #f9f9f9;
+    color: #000;
+  }
+}

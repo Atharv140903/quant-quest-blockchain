@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Register from "./Register";
+import './Home.css'; // Assuming your styles are in Home.css
 
 const Home = ({ walletAddress, setWalletAddress }) => {
   const [showRegister, setShowRegister] = useState(false);
@@ -34,60 +35,55 @@ const Home = ({ walletAddress, setWalletAddress }) => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Welcome to My Quiz App</h2>
-      {walletAddress ? (
-        <>
-          <p>Connected Account: {walletAddress}</p>
-        </>
-      ) : (
-        <>
-          <p>Connect your MetaMask wallet to start using the app.</p>
-          <button onClick={connectWallet} style={styles.button}>
+    <div className="home-container">
+      {/* Top navigation with logo and buttons */}
+      <div className="top-nav">
+        <img src="/smallLogo.svg" alt="QuantFi" className="small-logo" />
+        <div className="nav-buttons">
+          <button className="nav-button" onClick={connectWallet}>
             Connect Wallet
           </button>
-          <button
-            onClick={() => setShowRegister(true)}
-            style={{ ...styles.button, marginTop: "10px" }}
-          >
-            Get Started
+          <button className="nav-button" onClick={() => setShowRegister(true)}>
+            Register
           </button>
-        </>
-      )}
-      {showRegister && (
-        <div style={styles.modalOverlay}>
-          <div style={styles.modal}>
-            <Register onSubmit={handleRegisterSubmit} />
-            <button
-              onClick={() => setShowRegister(false)}
-              style={styles.closeButton}
-            >
-              Close
-            </button>
-          </div>
         </div>
-      )}
+      </div>
+
+      {/* Main content with logo and text */}
+      <div className="main-content">
+        <img src="/logo.svg" alt="Logo" className="main-logo" />
+        <h1>Learn Quantitative Finance With Experts</h1>
+
+        {walletAddress ? (
+          <p>Connected Account: {walletAddress}</p>
+        ) : (
+          <>
+            {/* Only keep the Get Started button centered */}
+            <button className="get-started-button" onClick={() => setShowRegister(true)}>
+              Get started &gt;&gt;
+            </button>
+          </>
+        )}
+
+        {showRegister && (
+          <div style={styles.modalOverlay}>
+            <div style={styles.modal}>
+              <Register onSubmit={handleRegisterSubmit} />
+              <button
+                onClick={() => setShowRegister(false)}
+                style={styles.closeButton}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
-  },
-  button: {
-    padding: "10px 20px",
-    borderRadius: "5px",
-    border: "none",
-    backgroundColor: "#007bff",
-    color: "#fff",
-    cursor: "pointer",
-    fontSize: "16px",
-  },
   modalOverlay: {
     position: "fixed",
     top: 0,

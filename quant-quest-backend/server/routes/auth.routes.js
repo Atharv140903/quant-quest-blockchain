@@ -5,6 +5,7 @@ module.exports = () => {
     router.post('/register', authController.registerUser);
     router.post('/nonce', authController.requestNonce);
     router.post('/verify', authController.verifySignature);
+    router.post('/simple-login', authController.loginUser);
 
     return router;
 };

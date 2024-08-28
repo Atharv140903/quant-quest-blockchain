@@ -43,6 +43,19 @@ module.exports = {
         return token;
     },
 
+    async loginUser (walletAddress) {
+        // Check if user already exists
+        let user = await userRepository.getUserByAddress(walletAddress);
+
+        if (!user) {
+            throw new Error("User not found, Please register");
+        }
+
+        // Generate JWT token
+        const token = createJwtToken(walletAddress);
+
+        return token;
+    },
 
     async registerUser(walletAddress, username, email) {
         // Check if user already exists

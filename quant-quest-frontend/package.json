@@ -1,5 +1,5 @@
 {
-  "name": "quant-quest-blockchain",
+  "name": "quant-quest",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "ethers": "^6.13.2",
+    "hardhat": "^2.22.9",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

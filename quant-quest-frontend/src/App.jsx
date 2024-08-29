@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Quizes from "./components/Quizes";
 import MakeQuizPage from "./components/MakeQuizPage";
+import QuizInfo from "./components/QuizInfo";
 import QuizPage from "./components/QuizPage";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             path="/create"
             element={<MakeQuizPage walletAddress={walletAddress} />}
           />
+          <Route path="/quiz-info" element={<QuizInfo />} />
           <Route path="/quiz" element={<QuizPage />} />
         </Routes>
       </div>

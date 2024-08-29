@@ -5,7 +5,9 @@ const QuizCard = ({ name, description, color, image }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/quiz`);
+    navigate(`/quiz-info`, {
+      state: { name, description }, // Pass the quiz data as state
+    });
   };
 
   const cardStyle = {
@@ -35,7 +37,7 @@ const styles = {
     textAlign: "center", // Center the content including the image
   },
   image: {
-    width: "100px",  // Adjust the size as needed
+    width: "100px", // Adjust the size as needed
     height: "100px",
     marginBottom: "10px", // Add some spacing between the image and the text
   },

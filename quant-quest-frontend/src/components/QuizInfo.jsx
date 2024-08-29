@@ -27,7 +27,7 @@ const QuizInfo = () => {
   };
 
   const handleStartQuiz = () => {
-    navigate("/quiz", { state: quizData }); // Navigate to the quiz page with quiz data
+    navigate(`/quiz`, { state: { quizData } });
   };
 
   const handleBack = () => {

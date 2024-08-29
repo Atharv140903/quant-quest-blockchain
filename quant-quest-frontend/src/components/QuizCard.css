@@ -1,0 +1,31 @@
+.quiz-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-align: center;
+}
+
+.quiz-card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-card-image {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.quiz-card-title {
+  margin: 10px 0;
+  font-size: 1.25rem;
+}
+
+.quiz-card-description {
+  font-size: 1rem;
+  color: #ddd;
+}

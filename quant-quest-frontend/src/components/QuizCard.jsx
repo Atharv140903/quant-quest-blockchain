@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./QuizCard.css"; // Import the external CSS file
 
 const QuizCard = ({ name, description, color, image }) => {
   const navigate = useNavigate();
@@ -10,40 +11,17 @@ const QuizCard = ({ name, description, color, image }) => {
     });
   };
 
-  const cardStyle = {
-    ...styles.card,
-    backgroundColor: color, // Use color prop for background color
-  };
-
   return (
-    <div onClick={handleClick} style={cardStyle}>
-      {/* Render SVG Image using the path */}
-      <img src={image} alt={name} style={styles.image} />
-      <h3>{name}</h3>
-      <p>{description}</p>
+    <div
+      onClick={handleClick}
+      className="quiz-card"
+      style={{ backgroundColor: color }} // Use color prop for background color
+    >
+      <img src={image} alt={name} className="quiz-card-image" />
+      <h3 className="quiz-card-title">{name}</h3>
+      <p className="quiz-card-description">{description}</p>
     </div>
   );
-};
-
-const styles = {
-  card: {
-    padding: "20px",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    color: "#fff",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    cursor: "pointer", // Make it clear that the card is clickable
-    transition: "transform 0.2s ease-in-out",
-    textAlign: "center", // Center the content including the image
-  },
-  image: {
-    width: "100px", // Adjust the size as needed
-    height: "100px",
-    marginBottom: "10px", // Add some spacing between the image and the text
-  },
-  cardHover: {
-    transform: "scale(1.05)", // Slightly enlarge the card on hover
-  },
 };
 
 export default QuizCard;

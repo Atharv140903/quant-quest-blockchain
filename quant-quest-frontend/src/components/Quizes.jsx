@@ -1,6 +1,6 @@
 import React from "react";
 import QuizCard from "./QuizCard";
-import './Quizes.css'; // Import the CSS file
+import "./Quizes.css"; // Import the CSS file
 
 const quizzes = [
   {
@@ -34,7 +34,33 @@ const quizzes = [
     color: "#F83C3C",
     image: "/phone.svg", // Use image path from the public folder
   },
-  // Add more quizzes as needed
+];
+
+const companyQuizes = [
+  {
+    id: 1,
+    name: "Citadel",
+    description:
+      "Explore quantitative finance concepts that drive Citadel's trading strategies.",
+    color: "#007bff",
+    image: "/citadel.svg", // Use image path from the public folder (replace with actual image)
+  },
+  {
+    id: 2,
+    name: "DE Shaw",
+    description:
+      "Delve into the mathematical models and algorithms used at DE Shaw.",
+    color: "#28a745",
+    image: "/deshaw.svg", // Use image path from the public folder (replace with actual image)
+  },
+  {
+    id: 3,
+    name: "Jane Street",
+    description:
+      "Understand the complex trading techniques employed by Jane Street.",
+    color: "#ffc107",
+    image: "/janeStreet.svg", // Use image path from the public folder (replace with actual image)
+  },
 ];
 
 const Quizes = () => {
@@ -52,6 +78,18 @@ const Quizes = () => {
           />
         ))}
       </div>
+      {/* <h2 className="company-heading">Prepare for Top Quant Firms</h2>
+      <div className="company-quiz-container">
+        {companyQuizes.map((quiz) => (
+          <QuizCard
+            key={quiz.id}
+            name={quiz.name}
+            description={quiz.description}
+            color={quiz.color}
+            image={quiz.image} // Pass image path to QuizCard
+          />
+        ))}
+      </div> */}
     </div>
   );
 };

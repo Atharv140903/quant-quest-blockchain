@@ -68,11 +68,11 @@ const Home = () => {
         {walletAddress ? (
           <p>Connected Account: {walletAddress}</p>
         ) : (
-          <>
+          <div>
             <button className="get-started-button" onClick={() => setShowRegister(true)}>
               Get started &gt;&gt;
             </button>
-          </>
+          </div>
         )}
 
         {showRegister && (

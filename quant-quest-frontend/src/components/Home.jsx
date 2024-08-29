@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 import Register from "./Register";
 import './Home.css'; // Assuming your styles are in Home.css
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Home = ({ walletAddress, setWalletAddress }) => {
   const [showRegister, setShowRegister] = useState(false);
+
+  const loginUser = async (walletAddress) => {
+    try {
+      const response = await axios.post('/api/simple-login', {
+        walletAddress
+      });
+      const { token } = response.data.data;
+      console.log('Login successful, token:', token);
+      Cookies.set('authToken', token, { expires: 7 }); 
+    } catch (error) {
+      console.error('Login failed:', error.response ? error.response.data.message : error.message);
+    }
+  };
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -11,8 +26,9 @@ const Home = ({ walletAddress, setWalletAddress }) => {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
+        console.log(accounts[0]);
         setWalletAddress(accounts[0]); // Set the wallet address in App.jsx state
-        console.log("Connected account:", accounts[0]);
+        await loginUser(accounts[0]);
       } catch (error) {
         console.error("User rejected connection:", error);
       }

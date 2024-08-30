@@ -1,97 +1,678 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import QuizCard from "./QuizCard";
-import "./Quizes.css"; // Import the CSS file
+import "./Quizes.css";
+import { setWalletAddress } from '../slices/walletSlice'; 
 
 const quizzes = [
-  {
-    id: 1,
-    name: "General Knowledge",
-    description:
-      "Test your general knowledge with this quiz covering a wide range of topics.",
-    color: "#38F3FF",
-    image: "/penguin.svg", // Use image path from the public folder
-  },
-  {
-    id: 2,
-    name: "Science Quiz",
-    description:
-      "Challenge yourself with questions on physics, chemistry, and biology.",
-    color: "transparent",
-    image: "/pig.svg", // Use image path from the public folder
-  },
-  {
-    id: 3,
-    name: "History Quiz",
-    description:
-      "How well do you know world history? Take this quiz to find out!",
-    color: "#6DE24F",
-    image: "/graph.svg", // Use image path from the public folder
-  },
-  {
-    id: 4,
-    name: "Finance Quiz",
-    description: "Lets see how much finance do you know!",
-    color: "#F83C3C",
-    image: "/phone.svg", // Use image path from the public folder
-  },
-];
+    {
+      "quizId": "1",
+      "quizCreator": "0x1234abcd5678ef901234abcd5678ef90abcd1234",
+      "genre": "Quantitative Finance Basics",
+      "description": "Test your knowledge of key concepts in quantitative finance.",
+      "timeLimit": "15", 
+      "color": "#38F3FF",
+      "image": "/penguin.svg",
+      "questions": [
+    {
+      "questionId": 1,
+      "quizId": "1",
+      "questionText": "What is the primary goal of quantitative finance?",
+      "options": [
+        "Maximizing profits",
+        "Minimizing risks",
+        "Modeling and analyzing financial markets",
+        "Understanding economic policies"
+      ],
+      "correctOption": 3,
+      "explanation": "Quantitative finance focuses on using mathematical models to analyze and predict financial markets.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 2,
+      "quizId": "1",
+      "questionText": "Which of the following is a common technique used in quantitative finance?",
+      "options": [
+        "Technical analysis",
+        "Monte Carlo simulation",
+        "Fundamental analysis",
+        "Game theory"
+      ],
+      "correctOption": 2,
+      "explanation": "Monte Carlo simulation is widely used in quantitative finance to model the probability of different outcomes.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 3,
+      "quizId": "1",
+      "questionText": "What does VaR stand for in risk management?",
+      "options": [
+        "Value at Risk",
+        "Variance at Risk",
+        "Value and Return",
+        "Volatility and Risk"
+      ],
+      "correctOption": 1,
+      "explanation": "VaR stands for Value at Risk, a measure used to assess the risk of loss on a specific portfolio of financial assets.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 4,
+      "quizId": "1",
+      "questionText": "In quantitative finance, what does a 'black swan' event refer to?",
+      "options": [
+        "A market crash",
+        "An unpredictable event with extreme consequences",
+        "A sudden surge in stock prices",
+        "A highly probable event with minimal impact"
+      ],
+      "correctOption": 2,
+      "explanation": "A 'black swan' event is an unpredictable event that has a major impact, often used in financial modeling.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 5,
+      "quizId": "1",
+      "questionText": "Which financial model is used to price options?",
+      "options": [
+        "Black-Scholes model",
+        "CAPM",
+        "GARCH model",
+        "Fama-French model"
+      ],
+      "correctOption": 1,
+      "explanation": "The Black-Scholes model is one of the most famous models used to price options.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 6,
+      "quizId": "1",
+      "questionText": "What does the Sharpe ratio measure?",
+      "options": [
+        "Portfolio return relative to risk",
+        "Market volatility",
+        "Expected return on investment",
+        "The probability of a market correction"
+      ],
+      "correctOption": 1,
+      "explanation": "The Sharpe ratio measures the performance of an investment compared to a risk-free asset, after adjusting for its risk.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 7,
+      "quizId": "1",
+      "questionText": "Which term refers to the sensitivity of an option's price to changes in the price of the underlying asset?",
+      "options": ["Gamma", "Delta", "Theta", "Vega"],
+      "correctOption": 2,
+      "explanation": "Delta measures the sensitivity of an option's price to changes in the price of the underlying asset.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 8,
+      "quizId": "1",
+      "questionText": "In the context of a financial model, what is heteroscedasticity?",
+      "options": [
+        "Constant variance of errors",
+        "Changing variance of errors",
+        "Multicollinearity between variables",
+        "Autocorrelation in time series data"
+      ],
+      "correctOption": 2,
+      "explanation": "Heteroscedasticity refers to the condition where the variance of errors in a regression model is not constant.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 9,
+      "quizId": "1",
+      "questionText": "Which method is often used to estimate the parameters of a financial model?",
+      "options": [
+        "Ordinary Least Squares (OLS)",
+        "Maximum Likelihood Estimation (MLE)",
+        "Monte Carlo simulation",
+        "Bootstrapping"
+      ],
+      "correctOption": 2,
+      "explanation": "Maximum Likelihood Estimation (MLE) is a popular method for estimating the parameters of a financial model.",
+      "pointsAwarded": 1
+    },
+    {
+      "questionId": 10,
+      "quizId": "1",
+      "questionText": "What is the primary advantage of using a GARCH model in financial forecasting?",
+      "options": [
+        "It predicts long-term market trends",
+        "It models volatility clustering in financial time series data",
+        "It eliminates the need for risk management",
+        "It simplifies the calculation of option prices"
+      ],
+      "correctOption": 2,
+      "explanation": "The GARCH model is useful in modeling volatility clustering, which is common in financial time series data.",
+      "pointsAwarded": 1
+    }
+  ]
+    },
+    
+    {
+        "quizId": "2",
+        "quizCreator": "0x9876abcd4321ef901234abcd5678ef90abcd4321",
+        "genre": "Quantitative Finance Mathematics",
+        "description": "A basic quiz to test your foundational knowledge of quantitative finance.",
+        "timeLimit": "15", 
+        "color": "transparent",
+        "image": "/pig.svg",
+        "questions": [
+            {
+                "questionId": 1,
+                "quizId": "2",
+                "questionText": "What is the purpose of a financial model?",
+                "options": [
+                    "To predict economic growth",
+                    "To model and analyze financial instruments",
+                    "To calculate taxes",
+                    "To manage personal finances"
+                ],
+                "correctOption": 2,
+                "explanation": "Financial models are used to model and analyze financial instruments.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 2,
+                "quizId": "2",
+                "questionText": "What does CAPM stand for?",
+                "options": [
+                    "Capital Asset Pricing Model",
+                    "Capital Allocation Portfolio Management",
+                    "Cashflow Analysis Portfolio Management",
+                    "Cost and Profit Margin"
+                ],
+                "correctOption": 1,
+                "explanation": "CAPM stands for Capital Asset Pricing Model, a key model in finance.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 3,
+                "quizId": "2",
+                "questionText": "Which of the following is an assumption of the Efficient Market Hypothesis?",
+                "options": [
+                    "Investors are irrational",
+                    "All relevant information is available to everyone at the same time",
+                    "Markets are always profitable",
+                    "Risk does not exist in financial markets"
+                ],
+                "correctOption": 2,
+                "explanation": "The Efficient Market Hypothesis assumes that all relevant information is available to all investors at the same time.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 4,
+                "quizId": "2",
+                "questionText": "What is the key difference between stocks and bonds?",
+                "options": [
+                    "Stocks represent ownership; bonds represent debt",
+                    "Stocks are safer than bonds",
+                    "Bonds have higher returns than stocks",
+                    "Bonds are riskier than stocks"
+                ],
+                "correctOption": 1,
+                "explanation": "Stocks represent ownership in a company, while bonds represent a loan made to the company.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 5,
+                "quizId": "2",
+                "questionText": "What is the purpose of diversification in a portfolio?",
+                "options": [
+                    "To maximize returns",
+                    "To reduce risk",
+                    "To increase liquidity",
+                    "To lower taxes"
+                ],
+                "correctOption": 2,
+                "explanation": "Diversification is used to reduce risk by spreading investments across different assets.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 6,
+                "quizId": "2",
+                "questionText": "Which financial instrument gives the holder the right, but not the obligation, to buy or sell an asset at a predetermined price?",
+                "options": [
+                    "Futures",
+                    "Options",
+                    "Bonds",
+                    "Stocks"
+                ],
+                "correctOption": 2,
+                "explanation": "Options give the holder the right, but not the obligation, to buy or sell an asset at a set price.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 7,
+                "quizId": "2",
+                "questionText": "What is a hedge fund?",
+                "options": [
+                    "A fund that invests in technology companies",
+                    "A fund that pools capital from accredited investors to use various strategies to earn active returns",
+                    "A fund that only invests in bonds",
+                    "A government-sponsored investment fund"
+                ],
+                "correctOption": 2,
+                "explanation": "Hedge funds use various strategies to earn active returns for their investors.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 8,
+                "quizId": "2",
+                "questionText": "What is beta in the context of finance?",
+                "options": [
+                    "A measure of a stock's volatility relative to the market",
+                    "The rate of return on a bond",
+                    "The time to maturity of a financial instrument",
+                    "A type of financial derivative"
+                ],
+                "correctOption": 1,
+                "explanation": "Beta measures a stock's volatility relative to the overall market.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 9,
+                "quizId": "2",
+                "questionText": "What is the purpose of an initial public offering (IPO)?",
+                "options": [
+                    "To raise capital for a private company by selling its shares to the public",
+                    "To merge two companies",
+                    "To declare bankruptcy",
+                    "To buy back shares from the public"
+                ],
+                "correctOption": 1,
+                "explanation": "An IPO allows a private company to raise capital by offering shares to the public for the first time.",
+                "pointsAwarded": 1
+            },
+            {
+                "questionId": 10,
+                "quizId": "2",
+                "questionText": "Which of the following is considered a risk-free asset?",
+                "options": [
+                    "Corporate bonds",
+                    "Government bonds",
+                    "High-yield stocks",
+                    "Savings accounts"
+                ],
+                "correctOption": 2,
+                "explanation": "Government bonds are typically considered risk-free because they are backed by the government.",
+                "pointsAwarded": 1
+            }
+        ]
+    },
+    
+    
+    
+    {
+        "quizId": "3",
+        "quizCreator": "0x3456abcd7890ef901234abcd5678ef90abcd6789",
+        "genre": "Quantitative Finance Advanced",
+        "description": "An advanced quiz to test your deep understanding of quantitative finance and complex models.",
+        "timeLimit": "25", // Time limit in minutes
+        "color": "#6DE24F",
+        "image": "/graph.svg",
+        "questions": [
+            {
+                "questionId": 1,
+                "quizId": "3",
+                "questionText": "What is the primary purpose of the GARCH model in finance?",
+                "options": [
+                    "To estimate the volatility of financial returns",
+                    "To forecast interest rates",
+                    "To model credit risk",
+                    "To price derivatives"
+                ],
+                "correctOption": 1,
+                "explanation": "The GARCH model is used to estimate the volatility of financial returns, which is key in risk management.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 2,
+                "quizId": "3",
+                "questionText": "In the Black-Scholes model, what does the 'sigma' (σ) represent?",
+                "options": [
+                    "The interest rate",
+                    "The volatility of the asset's returns",
+                    "The time to expiration",
+                    "The strike price of the option"
+                ],
+                "correctOption": 2,
+                "explanation": "In the Black-Scholes model, sigma (σ) represents the volatility of the asset's returns, which is a crucial component in pricing options.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 3,
+                "quizId": "3",
+                "questionText": "Which of the following is true about the Efficient Market Hypothesis (EMH) in its strong form?",
+                "options": [
+                    "Stock prices fully reflect all public information",
+                    "Stock prices fully reflect all information, both public and private",
+                    "Investors can consistently achieve higher returns through technical analysis",
+                    "Markets are inefficient and prone to frequent mispricings"
+                ],
+                "correctOption": 2,
+                "explanation": "The strong form of the Efficient Market Hypothesis (EMH) suggests that stock prices fully reflect all information, both public and private, leaving no room for consistent outperformance.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 4,
+                "quizId": "3",
+                "questionText": "What does 'Value at Risk' (VaR) measure?",
+                "options": [
+                    "The expected return on an investment",
+                    "The maximum loss not to be exceeded within a given confidence interval",
+                    "The volatility of an asset's returns",
+                    "The correlation between two assets"
+                ],
+                "correctOption": 2,
+                "explanation": "Value at Risk (VaR) measures the maximum potential loss that is not expected to be exceeded within a specified confidence interval over a given time period.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 5,
+                "quizId": "3",
+                "questionText": "In quantitative finance, what is meant by 'backtesting'?",
+                "options": [
+                    "Testing a trading strategy using historical data",
+                    "Analyzing the performance of a model in real-time",
+                    "Predicting future market movements",
+                    "Measuring the correlation between two assets"
+                ],
+                "correctOption": 1,
+                "explanation": "Backtesting involves testing a trading strategy using historical data to see how it would have performed.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 6,
+                "quizId": "3",
+                "questionText": "Which of the following risk measures is commonly used in credit risk modeling?",
+                "options": [
+                    "Conditional Value at Risk (CVaR)",
+                    "Probability of Default (PD)",
+                    "Sharpe Ratio",
+                    "Alpha"
+                ],
+                "correctOption": 2,
+                "explanation": "Probability of Default (PD) is a key risk measure used in credit risk modeling to estimate the likelihood that a borrower will default on a loan.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 7,
+                "quizId": "3",
+                "questionText": "What is the main advantage of using Monte Carlo simulation in portfolio management?",
+                "options": [
+                    "It simplifies portfolio optimization",
+                    "It provides a deterministic outcome",
+                    "It allows for modeling the uncertainty and randomness of various risk factors",
+                    "It eliminates market risk"
+                ],
+                "correctOption": 3,
+                "explanation": "Monte Carlo simulation allows for the modeling of uncertainty and randomness in various risk factors, making it useful for stress-testing portfolios under different scenarios.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 8,
+                "quizId": "3",
+                "questionText": "In the context of quantitative finance, what is 'mean reversion'?",
+                "options": [
+                    "The concept that asset prices will return to their historical average over time",
+                    "The assumption that markets are always efficient",
+                    "The process of increasing returns in a portfolio",
+                    "The correlation between two assets"
+                ],
+                "correctOption": 1,
+                "explanation": "Mean reversion is the concept that asset prices and returns eventually move back towards their historical average or mean.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 9,
+                "quizId": "3",
+                "questionText": "What does the term 'heteroskedasticity' refer to in regression analysis?",
+                "options": [
+                    "Constant variance of error terms",
+                    "Non-constant variance of error terms",
+                    "Perfect multicollinearity",
+                    "No correlation between error terms"
+                ],
+                "correctOption": 2,
+                "explanation": "Heteroskedasticity refers to the condition where the variance of the error terms is not constant across observations, which can affect the reliability of regression results.",
+                "pointsAwarded": 3
+            },
+            {
+                "questionId": 10,
+                "quizId": "3",
+                "questionText": "Which of the following is a primary concern when using high-frequency trading strategies?",
+                "options": [
+                    "Market liquidity",
+                    "Market volatility",
+                    "Latency and execution speed",
+                    "Interest rate fluctuations"
+                ],
+                "correctOption": 3,
+                "explanation": "Latency and execution speed are crucial in high-frequency trading strategies, as even microsecond delays can impact profitability.",
+                "pointsAwarded": 3
+            }
+        ]
+    },
+    
+    {
+        "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+        "quizCreator": "0x1234abcd5678ef901234abcd5678ef90abcd1234",
+        "genre": "Quantitative Finance Technical Analysis",
+        "description": "Test your understanding of advanced concepts in quantitative finance.",
+        "timeLimit": "20",
+        "color": "#F83C3C",
+        "image": "/phone.svg",
+        "questions": [
+          {
+            "questionId": 1,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "What is the primary use of the Capital Asset Pricing Model (CAPM) in finance?",
+            "options": [
+              "To estimate the risk-free rate",
+              "To calculate the expected return on equity",
+              "To determine the beta of a stock",
+              "To assess portfolio diversification"
+            ],
+            "correctOption": 2,
+            "explanation": "The CAPM is primarily used to calculate the expected return on equity based on the risk-free rate, beta, and the equity market premium.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 2,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "What does the Efficient Market Hypothesis (EMH) suggest?",
+            "options": [
+              "All investors have access to the same information",
+              "Stock prices reflect all available information",
+              "It is impossible to outperform the market consistently",
+              "Markets are always rational and efficient"
+            ],
+            "correctOption": 2,
+            "explanation": "The Efficient Market Hypothesis suggests that stock prices fully reflect all available information, making it impossible to consistently outperform the market.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 3,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "Which of the following models is used to predict the movement of interest rates?",
+            "options": [
+              "Black-Scholes model",
+              "Heston model",
+              "Vasicek model",
+              "Hull-White model"
+            ],
+            "correctOption": 3,
+            "explanation": "The Vasicek model is commonly used to predict the movement of interest rates.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 4,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "What is 'alpha' in the context of portfolio management?",
+            "options": [
+              "The measure of volatility in a portfolio",
+              "The return on a portfolio above the market return",
+              "The expected return on a risk-free asset",
+              "The measure of portfolio diversification"
+            ],
+            "correctOption": 2,
+            "explanation": "'Alpha' represents the return on a portfolio above the expected return given its risk (beta).",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 5,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "Which of the following is true about arbitrage opportunities in efficient markets?",
+            "options": [
+              "They are common and easily exploitable",
+              "They are eliminated quickly as they are identified",
+              "They exist only in illiquid markets",
+              "They provide guaranteed profits without risk"
+            ],
+            "correctOption": 2,
+            "explanation": "In efficient markets, arbitrage opportunities are eliminated quickly as they are identified.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 6,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "What is a key assumption of the Black-Scholes model?",
+            "options": [
+              "Stock prices follow a normal distribution",
+              "The market is perfectly liquid",
+              "Options can only be exercised at expiration",
+              "Volatility is constant over time"
+            ],
+            "correctOption": 4,
+            "explanation": "The Black-Scholes model assumes that volatility is constant over time, which is a critical assumption in the pricing of options.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 7,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "What is the purpose of stress testing in risk management?",
+            "options": [
+              "To calculate expected returns under normal conditions",
+              "To assess the impact of extreme market conditions",
+              "To identify potential arbitrage opportunities",
+              "To simulate trading strategies"
+            ],
+            "correctOption": 2,
+            "explanation": "Stress testing is used in risk management to assess the impact of extreme market conditions on a portfolio.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 8,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "In quantitative finance, what is meant by 'leverage'?",
+            "options": [
+              "The use of debt to finance assets",
+              "The ratio of debt to equity",
+              "The sensitivity of a portfolio to interest rate changes",
+              "The practice of short selling"
+            ],
+            "correctOption": 1,
+            "explanation": "Leverage refers to the use of debt to finance assets, amplifying both potential returns and risks.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 9,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "Which of the following best describes the concept of 'beta' in finance?",
+            "options": [
+              "The measure of systematic risk relative to the market",
+              "The return on a portfolio adjusted for risk",
+              "The correlation between two asset prices",
+              "The expected return on an investment"
+            ],
+            "correctOption": 1,
+            "explanation": "Beta measures the systematic risk of a security or portfolio relative to the overall market.",
+            "pointsAwarded": 1
+          },
+          {
+            "questionId": 10,
+            "quizId": "d4e9f3b2-5c8b-4e3f-9d71-8b8a8a5f9e6a",
+            "questionText": "What is the primary advantage of using a Monte Carlo simulation in financial modeling?",
+            "options": [
+              "It provides an exact solution to financial problems",
+              "It can model the probability of different outcomes under uncertainty",
+              "It simplifies the calculation of option prices",
+              "It guarantees risk-free profits"
+            ],
+            "correctOption": 2,
+            "explanation": "Monte Carlo simulation is advantageous because it can model the probability of different outcomes under uncertainty, making it useful in financial modeling.",
+            "pointsAwarded": 1
+          }
+        ]
+      }
+    
+    
+    ];
 
-const companyQuizes = [
-  {
-    id: 1,
-    name: "Citadel",
-    description:
-      "Explore quantitative finance concepts that drive Citadel's trading strategies.",
-    color: "#007bff",
-    image: "/citadel.svg", // Use image path from the public folder (replace with actual image)
-  },
-  {
-    id: 2,
-    name: "DE Shaw",
-    description:
-      "Delve into the mathematical models and algorithms used at DE Shaw.",
-    color: "#28a745",
-    image: "/deshaw.svg", // Use image path from the public folder (replace with actual image)
-  },
-  {
-    id: 3,
-    name: "Jane Street",
-    description:
-      "Understand the complex trading techniques employed by Jane Street.",
-    color: "#ffc107",
-    image: "/janeStreet.svg", // Use image path from the public folder (replace with actual image)
-  },
-];
 
-const Quizes = () => {
-  return (
-    <div>
-      <h2>Welcome, User! let’s learn Quant with experts....</h2>
-      <div className="quiz-container">
-        {quizzes.map((quiz) => (
-          <QuizCard
-            key={quiz.id}
-            name={quiz.name}
-            description={quiz.description}
-            color={quiz.color}
-            image={quiz.image} // Pass image path to QuizCard
-          />
-        ))}
-      </div>
-      {/* <h2 className="company-heading">Prepare for Top Quant Firms</h2>
-      <div className="company-quiz-container">
-        {companyQuizes.map((quiz) => (
-          <QuizCard
-            key={quiz.id}
-            name={quiz.name}
-            description={quiz.description}
-            color={quiz.color}
-            image={quiz.image} // Pass image path to QuizCard
-          />
-        ))}
-      </div> */}
-    </div>
-  );
-};
-
-export default Quizes;
+    const Quizes = () => {
+      const dispatch = useDispatch(); // Initialize the useDispatch hook
+      const navigate = useNavigate(); // Initialize the useNavigate hook
+    
+      const handleLogoClick = () => {
+        navigate('/'); // Navigate to the home route
+      };
+    
+      const handleSignOut = () => {
+        dispatch(setWalletAddress(null)); // Reset wallet address to null
+        navigate('/'); // Navigate to the home route
+      };
+    
+      return (
+        <div className="main-container">
+          <div className="sidebar">
+            <div className="logo-section" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+              <img src="/quiz/logo.svg" alt="QuantFi Logo" className="logo" />
+              <h1 className="logo-text">QuantFi</h1>
+            </div>
+            <div className="nav-buttons">
+              <button className="nav-button">
+                <img src="/quiz/learn.svg" alt="Learn Icon" className="nav-icon" />
+                Learn
+              </button>
+              <button className="nav-button">
+                <img src="/quiz/top.svg" alt="Leaderboard Icon" className="nav-icon" />
+                Leaderboard
+              </button>
+            </div>
+            <div className="profile-section">
+              <img src="/quiz/profile.png" alt="User Avatar" className="profile-pic" />
+              <p className="user-name">User123456</p>
+              <p className="profile-settings">Profile . Settings</p>
+            </div>
+            <button className="signout-button" onClick={handleSignOut}>Sign Out</button> {/* Add onClick to trigger sign out */}
+          </div>
+          <div className="content-wrapper">
+            <div className="content-container">
+              <h2 className="welcome-text">
+                Welcome, User! Let’s learn Quant with experts....
+              </h2>
+              <div className="quiz-container">
+                {quizzes.map((quiz) => (
+                  <QuizCard
+                    key={quiz.quizId}
+                    name={quiz.genre}
+                    description={quiz.description}
+                    color={quiz.color}
+                    image={quiz.image}
+                    questions={quiz.questions}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+    
+    export default Quizes;

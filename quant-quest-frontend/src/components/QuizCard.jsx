@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./QuizCard.css"; // Import the external CSS file
 
-const QuizCard = ({ name, description, color, image }) => {
+const QuizCard = ({ name, description, color, image,questions }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/quiz-info`, {
-      state: { name, description }, // Pass the quiz data as state
+      state: { name, description,questions }, // Pass the quiz data as state
     });
   };
 

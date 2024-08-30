@@ -5,32 +5,10 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 const QuizInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { name, description } = location.state || {}; // Destructure the state
-
-  const quizData = {
-    quizId: "36ee54c0-9129-4895-bb71-1809069610d6",
-    quizCreator: "0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199",
-    genre: "Quantitative Finance Basics",
-    description: "Practice statistics and DSA",
-    timeLimit: "12", // Time limit in minutes
-    questions: [
-      {
-        questionId: 1,
-        quizId: "36ee54c0-9129-4895-bb71-1809069610d6",
-        questionText: "What is the name of Citadel's CEO?",
-        options: ["Andrew Tate", "Elon Musk", "Donald Trump", "Ken Griffin"],
-        correctOption: 4,
-        explanation: "Ken Griffin is the CEO of Citadel.",
-        pointsAwarded: 1,
-      },
-      // Add more questions as needed...
-    ],
-  };
-
-  const handleStartQuiz = () => {
-    navigate(`/quiz`, { state: { quizData } });
-  };
-
+  const { name, description,questions } = location.state || {}; // Destructure the state
+    const handleStartQuiz = () => {
+        navigate(`/quiz`, { state: { name, description,questions } });
+    };
   const handleBack = () => {
     navigate("/learn"); // Navigate back to the quizzes page
   };

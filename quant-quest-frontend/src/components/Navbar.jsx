@@ -16,11 +16,6 @@ const Navbar = () => {
             Learn
           </Link>
         </li>
-        <li style={styles.navItem}>
-          <Link to="/create" style={styles.link}>
-            Create
-          </Link>
-        </li>
       </ul>
     </nav>
   );

@@ -1,11 +1,150 @@
-.quiz-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+.main-container {
+  display: flex;
+  padding-left: 250px; /* Adjust padding to match the width of the sidebar */
+  /* background-color: #111; Background color for the content area */
+  min-height: 100vh; /* Ensure it takes full height of the viewport */
 }
 
-.quiz-container h2 {
-  text-align: center;
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #000; /* Sidebar background color */
+  color: #fff;
+  width: 20vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto; /* This will allow scrolling within the sidebar if the content exceeds the viewport height */
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #333;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 10px; /* Add some space above the Sign Out button */
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.profile-settings {
+  font-size: 0.875rem;
+  color: #aaa;
+}
+
+.signout-button {
+  padding: 10px;
+  background-color: #333;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  margin-bottom: 20px; /* Add some space below the Sign Out button */
+}
+
+.content-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70vw;
+  height: auto;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.content-container {
+  padding: 20px;
+  flex-grow: 1; /* Allow the content to take the remaining width */
+  max-height: 100vh; /* Restricts the maximum height to the viewport height */
+  max-width: 600px;
+}
+
+
+.welcome-text {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: left;
+  margin-top: 100px;
+}
+
+
+.quiz-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+.quiz-card img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.quiz-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.quiz-card p {
+  font-size: 1rem;
 }

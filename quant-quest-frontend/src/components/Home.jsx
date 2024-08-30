@@ -1,28 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Register from './Register';
 import './Home.css';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import { setWalletAddress } from '../slices/walletSlice';
 
 const Home = () => {
-  const [showRegister, setShowRegister] = useState(false);
+  const [warningMessage, setWarningMessage] = useState(''); // State for warning message
   const dispatch = useDispatch();
   const walletAddress = useSelector((state) => state.wallet.address);
-
-  const loginUser = async (walletAddress) => {
-    try {
-      const response = await axios.post('/api/simple-login', {
-        walletAddress,
-      });
-      const { token } = response.data.data;
-      console.log('Login successful, token:', token);
-      Cookies.set('authToken', token, { expires: 7 });
-    } catch (error) {
-      console.error('Login failed:', error.response ? error.response.data.message : error.message);
-    }
-  };
+  const navigate = useNavigate();
+  console.log(walletAddress);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -32,7 +19,6 @@ const Home = () => {
         });
         console.log(accounts[0]);
         dispatch(setWalletAddress(accounts[0]));
-        await loginUser(accounts[0]);
       } catch (error) {
         console.error('User rejected connection:', error);
       }
@@ -41,10 +27,13 @@ const Home = () => {
     }
   };
 
-  const handleRegisterSubmit = (email, username) => {
-    console.log('User registered with email:', email, 'and username:', username);
-    setShowRegister(false);
-    connectWallet(); // Trigger MetaMask popup after registration
+  const handleGetStarted = () => {
+    if (walletAddress) {
+      navigate('/learn'); // Navigate to /learn if walletAddress is not null
+    } else {
+      setWarningMessage('Please connect your wallet to get started.'); // Set warning message
+      setTimeout(() => setWarningMessage(''), 3000); // Hide message after 3 seconds
+    }
   };
 
   return (
@@ -55,9 +44,6 @@ const Home = () => {
           <button className="nav-button" onClick={connectWallet}>
             Connect Wallet
           </button>
-          <button className="nav-button" onClick={() => setShowRegister(true)}>
-            Register
-          </button>
         </div>
       </div>
 
@@ -65,27 +51,21 @@ const Home = () => {
         <img src="/logo.svg" alt="Logo" className="main-logo" />
         <h1>Learn Quantitative Finance With Experts</h1>
 
-        {walletAddress ? (
-          <p>Connected Account: {walletAddress}</p>
-        ) : (
-          <div>
-            <button className="get-started-button" onClick={() => setShowRegister(true)}>
-              Get started &gt;&gt;
-            </button>
+        <div>
+          <button className="get-started-button" onClick={handleGetStarted}>
+            Get started &gt;&gt;
+          </button>
+        </div>
+
+        {walletAddress && (
+          <div style={styles.successMessage}>
+            Wallet connected successfully!
           </div>
         )}
 
-        {showRegister && (
-          <div style={styles.modalOverlay}>
-            <div style={styles.modal}>
-              <Register onSubmit={handleRegisterSubmit} />
-              <button
-                onClick={() => setShowRegister(false)}
-                style={styles.closeButton}
-              >
-                Close
-              </button>
-            </div>
+        {warningMessage && (
+          <div style={styles.warningMessage}>
+            {warningMessage}
           </div>
         )}
       </div>
@@ -94,31 +74,15 @@ const Home = () => {
 };
 
 const styles = {
-  modalOverlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  successMessage: {
+    color: '#00FFA3',
+    fontSize: '16px',
+    marginTop: '10px',
   },
-  modal: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '5px',
-    position: 'relative',
-  },
-  closeButton: {
-    position: 'absolute',
-    top: '10px',
-    right: '10px',
-    backgroundColor: 'transparent',
-    border: 'none',
-    fontSize: '20px',
-    cursor: 'pointer',
+  warningMessage: {
+    color: 'red',
+    fontSize: '16px',
+    marginTop: '10px',
   },
 };
 
